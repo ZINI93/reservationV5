@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>예약 메인</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container" style="max-width: 600px; margin-top: 50px;">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center">예약 시스템</h3>
+
+            <p class="text-center" th:text="${'안녕하세요, ' + member.userName + '님!'}"></p>
+
+            <div class="d-grid gap-2">
+                <a href="/reservations/new" class="btn btn-primary btn-lg">새 예약 만들기</a>
+                <a href="/reservations/list" class="btn btn-secondary btn-lg">내 예약 목록</a>
+                <a href="/logout" class="btn btn-danger btn-lg">로그아웃</a>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Bootstrap JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
