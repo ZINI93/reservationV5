@@ -41,7 +41,7 @@ class MemberServiceTest {
 
         // Member 엔티티를 생성하여 회원가입 후 저장결과를 시뮬레이션
         Member member = Member.builder()
-                .id(memberDto.getId())
+                .memberId(memberDto.getMemberId())
                 .loginId(memberDto.getLoginId())
                 .userName(memberDto.getUserName())
                 .password("encodedPassword")

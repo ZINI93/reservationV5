@@ -17,7 +17,8 @@ public class Member extends TimeStamp {
 
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @Column(name = "member_id")
+    private Long memberId;
 
     @Column(nullable = false, unique = true)
     private String loginId;
@@ -39,8 +40,8 @@ public class Member extends TimeStamp {
 
 
     @Builder
-    public Member(Long id, String loginId, String password, String userName, String phoneNumber, Role role) {
-        this.id = id;
+    public Member(Long memberId, String loginId, String password, String userName, String phoneNumber, Role role) {
+        this.memberId = memberId;
         this.loginId = loginId;
         this.password = password;
         this.userName = userName;

@@ -59,7 +59,7 @@ public class MemberController {
             Member member = memberService.findByLoginId(loginId);
             // 세션에 사용자 ID와 회원 ID 저장
             session.setAttribute("loginId", loginId);
-            session.setAttribute("memberId", member.getId()); // 추가
+            session.setAttribute("memberId", member.getMemberId()); // 추가
             // 메인 페이지로 리다이렉트
             return "redirect:/reservations";
         } else {
