@@ -16,7 +16,7 @@ import lombok.Setter;
 public class MemberDto {
 
 
-    private Long id;
+    private Long userId;
 
     @NotBlank(message = "ID를 입력하시오")
     @Size(min = 4,max = 15,message = "4 - 15 이내의 ID를 입력하시오")
