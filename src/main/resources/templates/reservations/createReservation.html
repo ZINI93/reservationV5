@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>예약 생성</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container" style="max-width: 500px; margin-top: 50px;">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center">예약 생성</h3>
+
+            <form th:action="@{/reservations/new}" th:object="${reservationForm}" method="post">
+                <div class="form-group">
+                    <label for="description">설명</label>
+                    <input type="text" id="description" th:field="*{description}" class="form-control" placeholder="내용을 입력하세요." required />
+                </div>
+
+                <div class="form-group">
+                    <label for="dateTime">시간:</label>
+                    <input type="datetime-local" id="dateTime" th:field="*{dateTime}" class="form-control" placeholder="시간을 입력하세요" required />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">예약</button>
+            </form>
+
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Bootstrap JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

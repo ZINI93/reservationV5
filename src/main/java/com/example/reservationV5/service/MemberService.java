@@ -1,6 +1,7 @@
 package com.example.reservationV5.service;
 
 import com.example.reservationV5.domain.Member;
+import com.example.reservationV5.domain.Role;
 import com.example.reservationV5.dto.MemberDto;
 import com.example.reservationV5.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,24 +27,25 @@ public class MemberService {
     @Transactional
     public Long signupMember(MemberDto memberDto){
         log.info("회원 가입 시작: {}", memberDto);
-        String encodedPassword = passwordEncoder.encode(memberDto.getPassword());
 
         Member member = Member.builder()
                 .loginId(memberDto.getLoginId())
-                .password(encodedPassword)
+                .password(passwordEncoder.encode(memberDto.getPassword()))
                 .userName(memberDto.getUserName())
                 .phoneNumber(memberDto.getPhoneNumber())
+                .role(Role.USER)
                 .build();
 
-        return memberRepository.save(member).getId();
-
+        return memberRepository.save(member).getMemberId();
     }
+
+
 
     /**
      * 회원 조회 (id)  삭ㅈ ㅔ 검토..
      * */
-    public Member findMemberById(Long id){
-        return memberRepository.findById(id)
+    public Member findMemberById(Long userId){
+        return memberRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을수 없습니다."));
     }
 
@@ -58,8 +60,8 @@ public class MemberService {
      * 회원 삭제
      */
     @Transactional
-    public void deleteMember(Long id){
-        Member member = findMemberById(id);
+    public void deleteMember(Long userId){
+        Member member = findMemberById(userId);
         memberRepository.delete(member);
     }
 
