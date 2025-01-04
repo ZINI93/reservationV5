@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>예약 메인</title>
+</head>
+<body>
+<h1>예약 시스템</h1>
+<p th:text="${'안녕하세요, ' + member.loginId + '님!'}"></p>
+<a href="/reservations/create">새 예약 만들기</a>
+<a href="/reservations/list">내 예약 목록</a>
+<a href="/logout">로그아웃</a>
+</body>
+</html>

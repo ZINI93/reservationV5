@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>membership</title>
+</head>
+<body>
+<h1>membership</h1>
+<form th:action="@{/members/new}" th:object="${memberDto}" method="post">
+    <label for="loginId">ID:</label>
+    <input type="text" id="loginId" th:field="*{loginId}"><br>
+
+    <label for="password">PASSWORD:</label>
+    <input type="password" id="password" th:field="*{password}"><br>
+
+    <label for="userName">NAME:</label>
+    <input type="text" id="userName" th:field="*{userName}"><br>
+
+    <label for="phoneNumber">PHONE_NUMBER:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}"><br>
+
+    <button type="submit">JOIN</button>
+</form>
+</body>
+</html>
