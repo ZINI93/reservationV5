@@ -1,7 +1,8 @@
 package com.example.reservationV5.controller.form;
 
 
-import com.example.reservationV5.domain.ReservationStatus;
+import com.example.reservationV5.domain.member.entity.Member;
+import com.example.reservationV5.domain.reservation.entitiy.ReservationStatus;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +18,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ReservationForm {
 
-    private Long MemberId;
+    private Member member;
+
+    private Long memberId;
 
     @NotBlank(message = "예약 설명을 입력해주세요.")
     private String description;
@@ -31,10 +34,12 @@ public class ReservationForm {
 
 
     @Builder
-    public ReservationForm(Long memberId, String description, LocalDateTime dateTime, ReservationStatus status) {
-        MemberId = memberId;
+    public ReservationForm(Member member, Long memberId, String description, LocalDateTime dateTime, ReservationStatus status) {
+        this.member = member;
+        this.memberId = memberId;
         this.description = description;
         this.dateTime = dateTime;
         this.status = status;
     }
 }
+

@@ -1,10 +1,14 @@
 package com.example.reservationV5.config;
 
+import com.example.reservationV5.domain.member.entity.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,7 +22,18 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean  // role 수직계층 시큐리티에 적용
+    public RoleHierarchy roleHierarchy(){
+
+        return RoleHierarchyImpl.withRolePrefix("ROLE_")
+                .role(UserRole.ADMIN.toString()).implies(UserRole.USER.toString())
+                .build();
+    }
 
 
     @Bean
@@ -32,24 +47,23 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
                                 .requestMatchers(PathRequest.toH2Console()).permitAll() // H2 콘솔에 대한 접근 허용
-                                .requestMatchers("/css/**", "/js/**", "/images/**","/", "/members/new","/reservations/**").permitAll() // 로그인, 회원 등록, 내 정보 페이지는 모든 사용자에게 허용
+                                .requestMatchers("/css/**", "/js/**", "/images/**","/").permitAll() // 로그인, 회원 등록, 내 정보 페이지는 모든 사용자에게 허용
+                                .requestMatchers("/members/new").permitAll() // 로그인, 회원 등록, 내 정보 페이지는 모든 사용자에게 허용
+                                .requestMatchers("/reservations/**").hasRole("USER")
                                 .requestMatchers("/admin").hasRole("ADMIN") // /admin은 ADMIN 역할만 접근 가능
-                                .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER") // /my/**는 ADMIN과 USER 역할만 접근 가능
                                 .anyRequest().authenticated() // 그 외의 모든 요청은 인증된 사용자만 접근 가능
                 )
+
                 .formLogin((auth) ->
-                        auth.loginPage("/members/login") // 로그인 페이지 설정
+                        auth.loginPage("/login") // 로그인 페이지 설정
                                 .loginProcessingUrl("/loginProc") // 로그인 처리 URL 설정
+                                .defaultSuccessUrl("/reservations",true)
                                 .permitAll() // 로그인 페이지는 모두 접근 가능
                 );
 
         return http.build(); // SecurityFilterChain 빌드
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {

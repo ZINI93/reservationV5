@@ -1,14 +1,14 @@
-package com.example.reservationV5.security;
+package com.example.reservationV5.domain.member.dto;
 
-import com.example.reservationV5.domain.Member;
-import lombok.Builder;
+import com.example.reservationV5.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -18,7 +18,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(member.getRole().name())); //  구체적인 권한체계를 다룰수 있도록 설계
+        return Collections.singletonList(() -> member.getRole().toString());
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return member.getLoginId();
+        return member.getUsername();
     }
 
     @Override

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>예약 생성</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
 </head>
@@ -11,7 +12,7 @@
         <div class="card-body">
             <h3 class="card-title text-center">예약 생성</h3>
 
-            <form th:action="@{/reservations/new}" th:object="${reservationForm}" method="post">
+            <form th:action="@{/reservations/new}" th:object="${ReservationDto}" method="post">
                 <div class="form-group">
                     <label for="description">설명</label>
                     <input type="text" id="description" th:field="*{description}" class="form-control" placeholder="내용을 입력하세요." required />

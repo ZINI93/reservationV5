@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
+<div th:fragment="~{fragments/header :: header}"></div>
     <title>로그인</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- 부트스트랩 CSS -->
@@ -17,10 +17,10 @@
             <h3 class="card-title text-center">로그인</h3>
 
             <!-- 로그인 폼 -->
-            <form th:action="@{/members/login}" method="post">
+            <form th:action="@{/loginProc}" method="post">
                 <div class="form-group">
-                    <label for="loginId">아이디</label>
-                    <input type="text" id="loginId" name="loginId" class="form-control" placeholder="아이디" required />
+                    <label for="username">아이디</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="아이디" required />
                 </div>
 
                 <div class="form-group">

@@ -1,13 +1,14 @@
-package com.example.reservationV5.dto;
+package com.example.reservationV5.domain.member.dto;
 
 
-import com.example.reservationV5.domain.Member;
-import com.example.reservationV5.domain.Role;
+import com.example.reservationV5.domain.member.entity.Member;
+import com.example.reservationV5.domain.member.entity.UserRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -20,25 +21,28 @@ public class MemberDto {
 
     @NotBlank(message = "ID를 입력하시오")
     @Size(min = 4,max = 15,message = "4 - 15 이내의 ID를 입력하시오")
-    private String loginId;
+    private String username;
 
     @NotBlank(message = "비밀번호를 입력하시오")
     @Size(min = 8,max = 20,message = "8- 20 이내의 비밀번호를 입력하시오")
     private String password;
 
     @NotBlank
-    private String userName;
+    private String name;
 
     @NotBlank(message = "전화번호를 입력하시오")
     @Pattern(regexp = "^080-\\d{4}-\\d{4}$", message = "유효한 국내 전화번호를 입력하세요. (형식: 080-XXXX-XXXX)")
     private String phoneNumber;
 
+    private UserRole role;
+
     @Builder
-    public MemberDto(String loginId, String password, String userName, String phoneNumber) {
-        this.loginId = loginId ;
+    public MemberDto(String username, String password, String name, String phoneNumber, UserRole role) {
+        this.username = username ;
         this.password = password;
-        this.userName = userName;
+        this.name = name;
         this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
 
@@ -47,11 +51,11 @@ public class MemberDto {
      */
     public Member toEntity(String encodedPassword) {
         return Member.builder()
-                .loginId(this.loginId)
+                .username(this.username)
                 .password(encodedPassword) // 암호화된 비밀번호 전달
-                .userName(this.userName)
+                .name(this.name)
                 .phoneNumber(this.phoneNumber)
-                .role(Role.USER) // 기본 역할 설정
+                .role(UserRole.ADMIN) // 기본 역할 설정
                 .build();
     }
 

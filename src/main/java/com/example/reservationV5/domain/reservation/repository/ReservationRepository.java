@@ -1,7 +1,7 @@
-package com.example.reservationV5.repository;
+package com.example.reservationV5.domain.reservation.repository;
 
-import com.example.reservationV5.domain.Member;
-import com.example.reservationV5.domain.Reservation;
+import com.example.reservationV5.domain.member.entity.Member;
+import com.example.reservationV5.domain.reservation.entitiy.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

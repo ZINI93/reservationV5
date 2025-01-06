@@ -1,5 +1,7 @@
-package com.example.reservationV5.domain;
+package com.example.reservationV5.domain.reservation.entitiy;
 
+import com.example.reservationV5.domain.TimeStamp;
+import com.example.reservationV5.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,17 +29,6 @@ public class Reservation extends TimeStamp {
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
-
-    //양방향 생성자
-    private void setMember(Member member) {
-        if (this.member != null) {
-            this.member.getReservations().remove(this);
-        }
-        this.member = member;
-        if (member != null) {
-            member.getReservations().add(this);
-        }
-    }
 
     //상태 변경 메서드
     public void changeStatus(ReservationStatus status){
