@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>예약 메인</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +13,12 @@
         <div class="card-body">
             <h3 class="card-title text-center">예약 시스템</h3>
 
-<!--            <span th:text="'안녕하세요, ' + (${member.name} != null ? member.username : '회원님') + '님!'"></span>-->
-
             <div class="d-grid gap-2">
                 <a href="/reservations/new" class="btn btn-primary btn-lg">새 예약 만들기</a>
                 <a href="/reservations/list" class="btn btn-secondary btn-lg">내 예약 목록</a>
                 <a href="/logout" class="btn btn-danger btn-lg">로그아웃</a>
+                <!-- Admin Page로 이동 버튼: ROLE_ADMIN 권한 사용자만 볼 수 있음 -->
+                <a href="/admin" class="btn btn-warning btn-lg" sec:authorize="hasAuthority('ROLE_ADMIN')">Admin Page로 이동</a>
             </div>
         </div>
     </div>

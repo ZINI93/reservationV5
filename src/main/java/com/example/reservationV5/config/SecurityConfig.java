@@ -49,7 +49,7 @@ public class SecurityConfig {
                                 .requestMatchers(PathRequest.toH2Console()).permitAll() // H2 콘솔에 대한 접근 허용
                                 .requestMatchers("/css/**", "/js/**", "/images/**","/").permitAll() // 로그인, 회원 등록, 내 정보 페이지는 모든 사용자에게 허용
                                 .requestMatchers("/members/new").permitAll() // 로그인, 회원 등록, 내 정보 페이지는 모든 사용자에게 허용
-                                .requestMatchers("/reservations/**").hasRole("USER")
+                                .requestMatchers("/reservations/**").authenticated()
                                 .requestMatchers("/admin").hasRole("ADMIN") // /admin은 ADMIN 역할만 접근 가능
                                 .anyRequest().authenticated() // 그 외의 모든 요청은 인증된 사용자만 접근 가능
                 )
