@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>휴대폰번호</th>
+                <th>회원 수정</th>
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="memberDto : ${members}">
+                <td th:text="${memberDto.username}"></td>
+                <td th:text="${memberDto.name}"></td>
+                <td th:text="${memberDto.phoneNumber}"></td>
+                <td>
+                    <a href="#" th:href="@{/admin/members/{memberId}/edit (memberId=${memberDto.memberId})}"
+                       class="btn btn-primary" role="button">회원수정</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

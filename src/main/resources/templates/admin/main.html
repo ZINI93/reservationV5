@@ -1,9 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>adminPage</title>
+    <title>관리자</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
 </head>
 <body>
+<div class="container" style="max-width: 600px; margin-top: 50px;">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center">관리자</h3>
+            <div class="d-grid gap-2">
+                <p class="lead">회원 기능</p>
+                <p>
+                <a href="/members/new" class="btn btn-primary btn-lg">회원가입</a>
+                <a href="/admin/members-list" class="btn btn-secondary btn-lg">회원리스트</a>
+                </p>
+                <p class="lead">예약기능</p>
+                <p>
+                <a href="/admin/today-reservations" class="btn btn-primary btn-lg">당일 예약</a>
+                <a href="/admin/reservation-list" class="btn btn-secondary btn-lg">전체예약리스트</a>
+                </p>
+                <a href="/logout" class="btn btn-danger btn-lg">로그아웃</a>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Bootstrap JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

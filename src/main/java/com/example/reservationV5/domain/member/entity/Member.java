@@ -42,4 +42,12 @@ public class Member extends TimeStamp {
         this.phoneNumber = phoneNumber;
         this.role = role;
     }
+
+    //업데이트
+    public void update(String name, String password, String phoneNumber){
+        this.name = name;
+        this.password =password;
+        this.phoneNumber = phoneNumber;
+
+    }
 }

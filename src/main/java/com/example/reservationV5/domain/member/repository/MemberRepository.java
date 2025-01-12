@@ -4,6 +4,7 @@ import com.example.reservationV5.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.naming.Name;
 import java.util.Optional;
 
 @Repository
@@ -15,6 +16,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     boolean existsByMemberId(Long memberId);
     boolean existsByUsername(String username); // join duplicateCheck
     Optional<Member> findByPhoneNumber(String phoneNumber);
+
+    Optional<Member> findByName(String name);
 
 
 //    Optional<Member> findByUsername(String username);

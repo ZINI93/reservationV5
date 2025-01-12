@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>예약 목록</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-5">
+    <h3 class="text-center">예약 목록</h3>
+
+    <form action="/admin/reservation-list" method="get" class="mb-3">
+        <div class="row">
+            <div class="col">
+                <input type="text" name="name" class="form-control" placeholder="이름" />
+            </div>
+            <div class="col">
+                <input type="text" name="phoneNumber" class="form-control" placeholder="전화번호" />
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">검색</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>예약 시간</th>
+            <th>예약 내용</th>
+            <th>예약 상태</th>
+            <th>회원 이름</th>
+            <th>전화 번호</th>
+            <th>예약 수정</th>
+            <th>예약 취소</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.dateTime}"></td>
+            <td th:text="${reservation.description}"></td>
+            <td th:text="${reservation.status}"></td>
+            <td th:text="${reservation.member.name}"></td>
+            <td th:text="${reservation.member.phoneNumber}"></td>
+            <td>
+                <a href="#" th:href="@{/admin/reservation/{id}/edit(id=${reservation.id})}"
+                   class="btn btn-primary" role="button">예약수정</a>
+            </td>
+            <td>
+                <!-- 예약 취소 버튼 -->
+                <a href="#" class="btn btn-danger">취소</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -37,7 +37,8 @@ public class MemberDto {
     private UserRole role;
 
     @Builder
-    public MemberDto(String username, String password, String name, String phoneNumber, UserRole role) {
+    public MemberDto(Long memberId,String username, String password, String name, String phoneNumber, UserRole role) {
+        this.memberId = memberId;
         this.username = username ;
         this.password = password;
         this.name = name;
@@ -45,6 +46,15 @@ public class MemberDto {
         this.role = role;
     }
 
+    public static MemberDto fromEntity(Member member){
+        return MemberDto.builder()
+                .memberId(member.getMemberId())
+                .username(member.getUsername())
+                .name(member.getName())
+                .phoneNumber(member.getPhoneNumber())
+                .role(member.getRole())
+                .build();
+    }
 
     /**
      * DTO -> 엔티티 변환

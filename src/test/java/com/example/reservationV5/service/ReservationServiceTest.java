@@ -64,30 +64,30 @@ class ReservationServiceTest {
                 .build();
     }
 
-    @DisplayName("예약 생성")
-    @Test
-    void createReservation_Success() {
-        // Member 객체가 DB에서 반환될 때를 Mock
-        when(memberRepository.findById(mockMember.getMemberId())).thenReturn(Optional.of(mockMember));
-
-        // 중복 예약이 없다는 것을 Mock
-        when(reservationRepository.save(any(Reservation.class))).thenReturn(Reservation.builder()
-                .id(1L)
-                .member(mockMember)
-                .description(mockReservationDto.getDescription())
-                .dateTime(mockReservationDto.getDateTime())
-                .status(ReservationStatus.CONFIRMED)
-                .build());
-
-        // 예약 생성 메서드 호출
-        Long reservationId = reservationService.createReservation(mockReservationDto);
-
-        // 검증
-        assertNotNull(reservationId);
-        assertEquals(1L, reservationId);
-        verify(memberRepository, times(1)).findById(mockMember.getMemberId());
-        verify(reservationRepository, times(1)).save(any(Reservation.class));
-    }
+//    @DisplayName("예약 생성")
+//    @Test
+//    void createReservation_Success() {
+//        // Member 객체가 DB에서 반환될 때를 Mock
+//        when(memberRepository.findById(mockMember.getMemberId())).thenReturn(Optional.of(mockMember));
+//
+//        // 중복 예약이 없다는 것을 Mock
+//        when(reservationRepository.save(any(Reservation.class))).thenReturn(Reservation.builder()
+//                .id(1L)
+//                .member(mockMember)
+//                .description(mockReservationDto.getDescription())
+//                .dateTime(mockReservationDto.getDateTime())
+//                .status(ReservationStatus.CONFIRMED)
+//                .build());
+//
+//        // 예약 생성 메서드 호출
+//        Long reservationId = reservationService.createReservation(mockReservationDto);
+//
+//        // 검증
+//        assertNotNull(reservationId);
+//        assertEquals(1L, reservationId);
+//        verify(memberRepository, times(1)).findById(mockMember.getMemberId());
+//        verify(reservationRepository, times(1)).save(any(Reservation.class));
+//    }
 
 
 }

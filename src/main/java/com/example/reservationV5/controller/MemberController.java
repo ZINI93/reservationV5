@@ -51,7 +51,7 @@ public class MemberController {
         }
         Long memberId = memberService.signupMember(memberDto);
         log.info("회원가입 성공: ID = {}", memberId);
-        return "redirect:/members/login";
+        return "redirect:/admin";
 
     }
 

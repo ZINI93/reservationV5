@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>오늘의 예약</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <h3 class="text-center mt-5">오늘의 예약</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>예약 시간</th>
+            <th>예약자</th>
+            <th>전화번호</th>
+            <th>예약 내용</th>
+            <th>예약 상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.dateTime}"></td>
+            <td th:text="${reservation.member.name}"></td>
+            <td th:text="${reservation.member.phoneNumber}"></td>
+            <td th:text="${reservation.description}"></td>
+            <td th:text="${reservation.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -4,13 +4,20 @@ import com.example.reservationV5.domain.member.entity.Member;
 import com.example.reservationV5.domain.member.service.MemberService;
 import com.example.reservationV5.domain.member.dto.MemberDto;
 import com.example.reservationV5.domain.member.repository.MemberRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -62,5 +69,83 @@ class MemberServiceTest {
 //        verify(memberRepository, times(1)).save(any(Member.class)); // save가 되었는지 확인.
 //
 //    }
+
+
+    @Test
+    @DisplayName("전체 회원 조회")
+    void findAll(){
+        //given
+        Member member1 = Member.builder().memberId(1L).username("qwas").name("zini").phoneNumber("080-1122-1123").build();
+        Member member2 = Member.builder().memberId(2L).username("qwasa").name("zinizi").phoneNumber("080-1232-1123").build();
+
+        when(memberRepository.findAll()).thenReturn( Arrays.asList(member1,member2));
+        //when
+        List<MemberDto> result = memberService.findAllMembers();
+
+        //then
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).getUsername()).isEqualTo("qwas");
+        assertThat(result.get(1).getName()).isEqualTo("zinizi");
+
+        verify(memberRepository, times(1)).findAll();
+
+    }
+    @Test
+    @DisplayName("ID로 회원 단건 조회 ")
+    void findByName(){
+        //when
+        Member member = Member.builder().memberId(1L).username("qwas").name("zini").phoneNumber("080-1122-1123").build();
+        when(memberRepository.findByName("zini")).thenReturn(Optional.of(member));
+
+        //when
+        Member result = memberService.findByName("zini");
+
+        //then
+        assertNotNull(result);
+        assertEquals("zini",result.getName());
+    }
+    @Test
+    @DisplayName("ID로 회원 단건 조회 ")
+    void findByPhoneNumber(){
+        //when
+        Member member = Member.builder().memberId(1L).username("qwas").name("zini").phoneNumber("080-1122-1123").build();
+        when(memberRepository.findByPhoneNumber("080-1122-1123")).thenReturn(Optional.of(member));
+
+        //when
+        Member result = memberService.findByPhoneNumber("080-1122-1123");
+
+        //then
+        assertNotNull(result);
+        assertEquals("080-1122-1123",result.getPhoneNumber());
+    }
+
+    @Test
+    @DisplayName("회원 업데이트")
+    void updateMember(){
+        //given
+        String password = "12341234";
+        String encodedPassword = passwordEncoder.encode(password);
+
+        Member member = Member.builder().memberId(1L).name("zini").password(encodedPassword).phoneNumber("080-1122-1123").build();
+        MemberDto memberDto = MemberDto.builder().memberId(1L).name("parkJInhee").password(password).phoneNumber("010-1235-1235").build();
+
+
+        when(passwordEncoder.encode(anyString())).thenReturn(encodedPassword); // 비밀번호 인코딩 mock
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
+        when(memberRepository.save(any(Member.class))).thenReturn(member);
+
+        //when
+        MemberDto updatedMember = memberService.updateMember(memberDto);
+
+        //then
+        assertNotNull(updatedMember);
+        assertEquals("parkJInhee", updatedMember.getName());
+        assertEquals(encodedPassword, updatedMember.getPassword()); // encodedPassword를 비교
+        assertEquals("010-1235-1235", updatedMember.getPhoneNumber());
+        verify(memberRepository).save(any(Member.class));
+
+    }
+
+
 
 }

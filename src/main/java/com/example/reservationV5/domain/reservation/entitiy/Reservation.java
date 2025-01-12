@@ -50,4 +50,9 @@ public class Reservation extends TimeStamp {
             throw new IllegalArgumentException("예약은 과거일 수 없습니다.");
         }
     }
+
+    public void updateReservation(LocalDateTime dateTime, ReservationStatus status){
+        this.dateTime = dateTime;
+        this.status = status;
+    }
 }

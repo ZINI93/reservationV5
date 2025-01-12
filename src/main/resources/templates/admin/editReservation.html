@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>예약 수정</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container" style="max-width: 600px; margin-top: 50px;">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center">예약 수정</h3>
+
+            <!-- 예약 수정 폼 -->
+            <form th:action="@{/admin/reservation/{reservationId}/edit(reservationId=${reservation.id})}" th:object="${reservation}" method="post">
+                <!-- 예약 시간 -->
+                <div class="mb-3">
+                    <label for="dateTime" class="form-label">예약 시간</label>
+                    <input type="datetime-local" id="dateTime" class="form-control" th:field="*{dateTime}" required />
+                </div>
+
+                <!-- 예약 상태 -->
+                <div class="mb-3">
+                    <label for="status" class="form-label">예약 상태</label>
+                    <select id="status" class="form-select" th:field="*{status}">
+                        <option value="CONFIRMED" th:selected="*{status == 'CONFIRMED'}">확정</option>
+                        <option value="CANCEL" th:selected="*{status == 'CANCEL'}">취소</option>
+                    </select>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">수정하기</button>
+                    <a href="/admin/reservation-list" class="btn btn-secondary">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

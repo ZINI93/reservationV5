@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원 수정</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container" style="max-width: 600px; margin-top: 50px;">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center">회원 수정</h3>
+            <form th:action="@{/admin/members/{memberId}/edit(memberId=${member.memberId})}"
+                  th:object="${member}" method="post">
+                <!-- 이름 -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" id="name" class="form-control" th:field="*{name}" placeholder="이름을 입력하세요" required />
+                </div>
+
+                <!-- 비밀번호 -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" id="password" class="form-control" th:field="*{password}" placeholder="비밀번호를 입력하세요" required />
+                </div>
+
+                <!-- 전화번호 -->
+                <div class="mb-3">
+                    <label for="phoneNumber" class="form-label">전화번호</label>
+                    <input type="text" id="phoneNumber" class="form-control" th:field="*{phoneNumber}" placeholder="전화번호를 입력하세요" required />
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">수정하기</button>
+                    <a href="/admin/members-list" class="btn btn-secondary">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
