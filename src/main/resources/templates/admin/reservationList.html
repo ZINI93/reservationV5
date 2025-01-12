@@ -48,15 +48,26 @@
                    class="btn btn-primary" role="button">예약수정</a>
             </td>
             <td>
-                <!-- 예약 취소 버튼 -->
-                <a href="#" class="btn btn-danger">취소</a>
+                <!-- 예약 취소 및 삭제 버튼 -->
+                <form th:action="@{/admin/reservation/{id}/cancel-delete(id=${reservation.id})}" method="post" style="display:inline;" onsubmit="return confirmCancel();">
+                    <button type="submit" class="btn btn-danger">취소</button>
+                </form>
             </td>
         </tr>
         </tbody>
     </table>
+    <div class="text-center mt-4">
+        <a href="/admin" class="btn btn-primary">메인으로 돌아가기</a>
+        <br> <div style="height: 20px;"></div> </div>
 </div>
 
 <!-- Bootstrap JS -->
 <script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 취소 확인 메서드
+    function confirmCancel() {
+        return confirm("정말 취소하시겠습니까?");
+    }
+</script>
 </body>
 </html>

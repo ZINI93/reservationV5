@@ -17,9 +17,11 @@
                 <a href="/reservations/new" class="btn btn-primary btn-lg">새 예약 만들기</a>
                 <a href="/reservations/list" class="btn btn-secondary btn-lg">내 예약 목록</a>
                 <a href="/logout" class="btn btn-danger btn-lg">로그아웃</a>
-                <!-- Admin Page로 이동 버튼: ROLE_ADMIN 권한 사용자만 볼 수 있음 -->
-                <a href="/admin" class="btn btn-warning btn-lg" sec:authorize="hasAuthority('ROLE_ADMIN')">Admin Page로 이동</a>
             </div>
+<!--            &lt;!&ndash; Admin Page로 이동 버튼: ROLE_ADMIN 권한 사용자만 볼 수 있음 &ndash;&gt;-->
+<!--            <div class="text-center mt-4">-->
+<!--                <a href="/admin" class="btn btn-warning btn-lg" sec:authorize="hasRole('ROLE_ADMIN')">Admin Page로 이동</a>-->
+<!--            </div>-->
         </div>
     </div>
 </div> <!-- /container -->

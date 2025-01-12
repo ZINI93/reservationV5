@@ -93,13 +93,16 @@ public class ReservationService {
     //취소
 
     @Transactional
-    public void deleteReservation(ReservationDto reservationDto){
-        Reservation reservation = reservationRepository.findById(reservationDto.getId())
-                .orElseThrow(() -> new NoSuchElementException("예약이 존재하지 않습니다"));
+    public void cancelAndDeleteReservation(Long reservationId){
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
 
+        // 예약 상태를 CANCEL로 변경
+        reservation.changeStatus(ReservationStatus.CANCEL);
+
+        // 예약 삭제
         reservationRepository.delete(reservation);
     }
-
 
 
 

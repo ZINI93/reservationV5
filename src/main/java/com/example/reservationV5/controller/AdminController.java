@@ -91,7 +91,11 @@ public class AdminController {
         return "redirect:/admin/reservation-list";
     }
 
-
+    @PostMapping("/reservation/{reservationId}/cancel-delete")
+    public String cancelAndDeleteReservation(@PathVariable Long reservationId) {
+        reservationService.cancelAndDeleteReservation(reservationId);
+        return "redirect:/admin/reservation-list"; // 취소 및 삭제 후 예약 목록 페이지로 리다이렉트
+    }
 
 
 }
