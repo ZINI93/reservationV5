@@ -40,7 +40,7 @@ Spring Bootに基づく病院予約システムです。会員登録、ログイ
 * **予約確認:** GET /reservations/list
 
 **ADMIN**
-* **会員登録:** GET/POST /members/new
+* **会員登録:** GET /members/new
 * **会員リストの確認:** GET /admin/members-list
 * **会員情報の編集:** GET/POST /admin/members/{id}/edit
 * **今日の予約確認:** GET/admin/today-reservations
