@@ -3,6 +3,7 @@ package com.example.reservationV5.domain.member.dto;
 
 import com.example.reservationV5.domain.member.entity.Member;
 import com.example.reservationV5.domain.member.entity.UserRole;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

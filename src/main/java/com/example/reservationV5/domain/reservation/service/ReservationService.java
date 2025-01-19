@@ -130,8 +130,15 @@ public class ReservationService {
 //
 //        return reservationRepository.findByMember(member);
 //    }
-    public List<Reservation> getAllReservation(){
-        return reservationRepository.findAll();
+    public List<ReservationDto> findAllReservations(){
+        List<Reservation> reservations = reservationRepository.findAll();
+
+        if ( reservations.isEmpty()){
+            throw new IllegalStateException("회원 정보가 없습니다.");
+        }
+        return reservations.stream()
+                .map(ReservationDto::fromEntity)
+                .collect(Collectors.toList());
     }
 
 

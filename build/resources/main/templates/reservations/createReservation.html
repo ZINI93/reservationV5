@@ -34,5 +34,24 @@
 
 <!-- Bootstrap JS -->
 <script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dateTimeInput = document.getElementById("dateTime");
+
+        // 현재 시간을 도쿄 시간(UTC+9)으로 변환
+        const now = new Date();
+        const tokyoOffset = 9 * 60; // 도쿄 시간은 UTC+9
+        now.setMinutes(now.getMinutes() + now.getTimezoneOffset() + tokyoOffset); // 도쿄 시간으로 조정
+
+        // 현재 시간을 ISO 형식으로 변환 (YYYY-MM-DDTHH:MM)
+        const minDateTime = new Date(now).toISOString().slice(0, 16); // "YYYY-MM-DDTHH:MM" 형식
+
+        // 'min' 속성에 도쿄 시간 기준으로 설정
+        dateTimeInput.setAttribute("min", minDateTime);
+
+        // 날짜 및 시간이 올바르게 설정되었는지 콘솔로 확인
+        console.log(minDateTime);
+    });
+</script>
 </body>
 </html>

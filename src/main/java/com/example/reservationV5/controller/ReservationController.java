@@ -131,7 +131,7 @@ public class ReservationController {
     @GetMapping("/list")
     public String listReservations(Model model){
 
-        List<Reservation> reservations = reservationService.getAllReservation();
+        List<ReservationDto> reservations = reservationService.findAllReservations();
         model.addAttribute("reservations",reservations);
 
         return "reservations/list";

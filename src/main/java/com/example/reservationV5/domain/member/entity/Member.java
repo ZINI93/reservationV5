@@ -1,6 +1,9 @@
 package com.example.reservationV5.domain.member.entity;
 
 import com.example.reservationV5.domain.TimeStamp;
+import com.example.reservationV5.domain.member.dto.MemberDto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,9 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-@Entity
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 public class Member extends TimeStamp {
 
 
